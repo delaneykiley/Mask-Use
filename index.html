@@ -19,33 +19,30 @@
             var g = svg.append("g")
                .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
-            const dataset = d3.csv("data/systems.csv").then(function(data)
-                {return data;
+
+            d3.csv("data/systems.csv", 
+                   function(error, data) {
+                        if (error) {
+                            throw error;
+                    }
+
+                    xScale.domain(data.map(function(d) { return d.system; }));
+                    yScale.domain([0, d3.max(data, function(d) { return d.total_inmate_cases; })]);
+
+                    g.append("g")
+                     .attr("transform", "translate(0," + height + ")")
+                     .call(d3.axisBottom(xScale));
+
+                    g.append("g")
+                     .call(d3.axisLeft(yScale).tickFormat(function(d){
+                         return "$" + d;
+                     }).ticks(10))
+                     .append("text")
+                     .attr("y", 6)
+                     .attr("dy", "0.71em")
+                     .attr("text-anchor", "end")
+                     .text("value");
             });
-
-            // d3.csv("https://raw.githubusercontent.com/delaneykiley/Mask-Use/main/data/systems.csv", 
-            //        function(error, data) {
-            //             if (error) {
-            //                 throw error;
-            //         }
-
-            //         xScale.domain(data.map(function(d) { return d.system; }));
-            //         yScale.domain([0, d3.max(data, function(d) { return d.total_inmate_cases; })]);
-
-            //         g.append("g")
-            //          .attr("transform", "translate(0," + height + ")")
-            //          .call(d3.axisBottom(xScale));
-
-            //         g.append("g")
-            //          .call(d3.axisLeft(yScale).tickFormat(function(d){
-            //              return "$" + d;
-            //          }).ticks(10))
-            //          .append("text")
-            //          .attr("y", 6)
-            //          .attr("dy", "0.71em")
-            //          .attr("text-anchor", "end")
-            //          .text("value");
-            // });
 
         </script>
     </body>
