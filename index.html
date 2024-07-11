@@ -21,11 +21,8 @@
 
 
             d3.csv("data/systems.csv", 
-                   function(error, data) {
-                        if (error) {
-                            throw error;
-                    }
-
+                   function(data) {
+                        
                     xScale.domain(data.map(function(d) { return d.system; }));
                     yScale.domain([0, d3.max(data, function(d) { return d.total_inmate_cases; })]);
 
