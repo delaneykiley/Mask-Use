@@ -6,10 +6,17 @@
     
     <body>
         <script>
+            
             d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/prisons/systems.csv", 
                 function(data) {
-                    console.log(data.system);
-                    console.log(data.total_inmate_cases);
+                        d3.select("body")
+                            .selectAll("p")
+                            .data(data)
+                            .enter()
+                            .append("p")
+                            .text(function(d) {
+                                return d.system + ", " + d.total_inmate_cases;
+                                });
                     }
                 );
         </script>
