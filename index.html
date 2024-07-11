@@ -23,7 +23,7 @@
             d3.csv("data/systems.csv", 
                    function(data) {
                         
-                    xScale.domain(data.map(function(d) { return d.system; }));
+                    xScale.domain([0, 49]);
                     yScale.domain([0, d3.max(data, function(d) { return d.total_inmate_cases; })]);
 
                     g.append("g")
