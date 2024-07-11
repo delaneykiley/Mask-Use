@@ -6,9 +6,10 @@
     
     <body>
         <script>
-            d3.csv("https://raw.githubusercontent.com/delaneykiley/Mask-Use/main/us-states.csv", 
+            d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/prisons/systems.csv", 
                 function(data) {
-                    console.log(data.state);
+                    console.log(data.system);
+                    console.log(data.total_inmate_cases);
                     }
                 );
         </script>
