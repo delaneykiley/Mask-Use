@@ -1,26 +1,51 @@
 <!DOCTYPE html>
-<script src="https://d3js.org/d3.v3.min.js"></script>
 
-<style> .chart rect { fill: steelblue } </style>
+<script src='https://d3js.org/d3.v5.min.js'></script>
 
+<style> rect {fill: lightblue; stroke: black; }</style>
 
-<html><body>
-    <p>Here are the magic numbers from Lost: <span id="data"></span></p>
-
-    <svg> class="chart" width="120" height="500"
+<body>
+    
+    <svg width=300 height=300>
     </svg>
-
+    
     <script>
-    var data = [4,8,15,16,23.42]
-    document.getElementById("data").innerHTML = data;
-    d3.select(".chart")
-            .selectAll("rect")
-            .data(data)
-        .enter().append("rect")
-        .attr("width", 19)
-        .attr("height", function(d) { return 10*d; })
-        .attr("x", function(d,i) { return 20*i; })
-        .attr("y", function(d) {return 420 - 10*d; });
+        var data = [4,8,15,16,23,42];
+        var margin = 50,
+        width = 300 - 2*margin,
+        height = 300 - 2*margin;
+
+        var x = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,width]);
+        var y = d3.scaleLinear().domain([0,42]).range([height,0]);
+
+
+        var svg = d3.select("svg")
+        .attr("width",width + 2*margin)
+        .attr("height",height + 2*margin)
+
+        svg.append("g")
+        .attr("transform","translate("+margin+","+margin+")")
+        .selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", function(d,i) {return x(i); })
+        .attr("y", function(d) {return y(d); })
+        .attr("width", x.bandwidth())
+        .attr("height", function(d) {return height - y(d); });
+
+        svg.append("g")
+        .attr("transform","translate("+margin+","+margin+")")
+        .call(d3.axisLeft(y));
+
+        svg.append("g")
+        .attr("transform","translate("+margin+","+(height+margin)+")")
+        .call(d3.axisBottom(x));
+
+    
     </script>
     
-</body> </html>
+</body>
+
+
+</html>
