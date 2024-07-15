@@ -26,8 +26,18 @@
         .attr("transform","translate("+margin+","+margin+")")
 
         d3.csv("data/cars2017.csv").then(function(data) {
-              x.domain([0, d3.max(data, function(d) { return d.EngineCylinders; })]);
-              y.domain([0, d3.max(data, function(d) { return d.AverageHighwayMPG; })]);
+            x.domain([0, d3.max(data, function(d) { return d.EngineCylinders; })]);
+            y.domain([0, d3.max(data, function(d) { return d.AverageHighwayMPG; })]);
+
+            svg.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.EngineCylinders); })
+            .attr("y", function(d) { return y(d.AverageHighwayMPG); })
+            .attr("height", function(d) { return height - y(d.AverageHighwayMPG); });
+
+    
 
         });
         
