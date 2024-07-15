@@ -16,8 +16,16 @@
         height = 300 - 2*margin;
 
         d3.csv("data/cars2017.csv", function(data) {
-             console.log(data) }
-               );
+            d3.select("body")
+            .selectAll("p")
+            .data(data)
+            .enter()
+            .append("p")
+        });
+
+        d3.select("body")
+            .selectAll("p")
+            .
 
             
         var x = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,width]);
