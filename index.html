@@ -10,7 +10,7 @@
     </svg>
     
     <script>
-        var data = [4,8,15,16,23,42];
+        // var data = [4,8,15,16,23,42];
         var margin = 50,
         width = 300 - 2*margin,
         height = 300 - 2*margin;
@@ -24,10 +24,13 @@
             .text("test")
         });
 
+        var x = d3.scaleBand().range([0,width]);
+        var y = d3.scaleLinear().range([height,0]);
+
 
             
-        var x = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,width]);
-        var y = d3.scaleLinear().domain([0,42]).range([height,0]);
+        // var x = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,width]);
+        // var y = d3.scaleLinear().domain([0,42]).range([height,0]);
 
 
         var svg = d3.select("svg")
@@ -36,14 +39,14 @@
 
         svg.append("g")
         .attr("transform","translate("+margin+","+margin+")")
-        .selectAll("rect")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", function(d,i) {return x(i); })
-        .attr("y", function(d) {return y(d); })
-        .attr("width", x.bandwidth())
-        .attr("height", function(d) {return height - y(d); });
+        // .selectAll("rect")
+        // .data(data)
+        // .enter()
+        // .append("rect")
+        // .attr("x", function(d,i) {return x(i); })
+        // .attr("y", function(d) {return y(d); })
+        // .attr("width", x.bandwidth())
+        // .attr("height", function(d) {return height - y(d); });
 
         svg.append("g")
         .attr("transform","translate("+margin+","+margin+")")
