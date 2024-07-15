@@ -29,6 +29,8 @@
             x.domain([0, d3.max(data, function(d) { return d.EngineCylinders; })]);
             y.domain([0, d3.max(data, function(d) { return d.AverageHighwayMPG; })]);
 
+            console.log(x);
+
             svg.selectAll("rect")
             .data(data)
             .enter()
