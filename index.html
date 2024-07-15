@@ -35,6 +35,7 @@
             .append("rect")
             .attr("x", function(d) { return x(d.EngineCylinders); })
             .attr("y", function(d) { return y(d.AverageHighwayMPG); })
+            .attr("width", x.bandwidth())
             .attr("height", function(d) { return height - y(d.AverageHighwayMPG); });
 
     
