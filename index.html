@@ -26,7 +26,7 @@
         .attr("transform","translate("+margin+","+margin+")")
 
         d3.csv("data/cars2017.csv").then(function(data) {
-            x.domain([0, d3.max(data, function(d) { return d.EngineCylinders; })]);
+            x.domain((function(d) { return d.Make; }));
             y.domain([0, d3.max(data, function(d) { return d.AverageHighwayMPG; })]);
 
             console.log(x);
