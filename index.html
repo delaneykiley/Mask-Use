@@ -82,14 +82,6 @@
         // .attr("width", x.bandwidth())
         // .attr("height", function(d) {return height - y(d); });
 
-        svg.append("g")
-        .attr("transform","translate("+margin+","+margin+")")
-        .call(d3.axisLeft(y));
-
-        svg.append("g")
-        .attr("transform","translate("+margin+","+(height+margin)+")")
-        .call(d3.axisBottom(x));
-
     
     </script>
     
