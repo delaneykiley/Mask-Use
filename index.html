@@ -15,30 +15,24 @@
         width = 300 - 2*margin,
         height = 300 - 2*margin;
 
-        var x = d3.scaleBand().range([0,width]);
-        var y = d3.scaleLinear().range([height,0]);
 
         var svg = d3.select("svg")
         .attr("width",width + 2*margin)
         .attr("height",height + 2*margin)
 
-        svg.append("g")
-        .attr("transform","translate("+margin+","+margin+")")
 
         d3.csv("data/cars2017.csv").then(function(data) {
-            x.domain((function(d) { return d.Make; }));
-            y.domain([0, d3.max(data, function(d) { return d.AverageHighwayMPG; })]);
-
-            console.log(x);
-
-            svg.selectAll("rect")
-            .data(data)
-            .enter()
-            .append("rect")
-            .attr("x", function(d) { return x(d.EngineCylinders); })
-            .attr("y", function(d) { return y(d.AverageHighwayMPG); })
-            .attr("width", x.bandwidth())
-            .attr("height", function(d) { return height - y(d.AverageHighwayMPG); });
+            var xScale = d3.scaleLinear().domain([0, 12]).range([0, width]),
+            yScale = d3.scaleLinear().domain([0, 130]).range([height, 0]);
+            
+            // Title
+            svg.append('text')
+            .attr('x', width/2 + 100)
+            .attr('y', 100)
+            .attr('text-anchor', 'middle')
+            .style('font-family', 'Helvetica')
+            .style('font-size', 20)
+            .text('Line Chart');
 
     
 
