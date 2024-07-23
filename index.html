@@ -34,13 +34,23 @@ async function init() {
 
     const data = await d3.csv('listings.csv');
 
-    // Filter data by number of reviews and neighborhood group
-    // const filteredData = data.filter(row => 
-    //     row.number_of_reviews >= 100 && 
-    //     row.neighbourhood_group == "Manhattan");
+    // Filter data by borough
+    const manhattanData = data.filter(row => 
+        row.neighbourhood_group == "Manhattan");
+    const brooklynData = data.filter(row => 
+        row.neighbourhood_group == "Brooklyn");
+    const queensData = data.filter(row => 
+        row.neighbourhood_group == "Queens");
+    const bronxData = data.filter(row => 
+        row.neighbourhood_group == "Bronx");
+    const siData = data.filter(row => 
+        row.neighbourhood_group == "Staten Island");
 
-
-    console.log(data);
+    console.log(manhattanData.length);
+    console.log(brooklynData.length);
+    console.log(queensData.length);
+    console.log(bronxData.length);
+    console.log(siData.length);
 
 
     // Universal chart dimensions
