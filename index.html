@@ -2,90 +2,18 @@
 
 <script src='https://d3js.org/d3.v5.min.js'></script>
 
-<style> rect {fill: lightblue; stroke: black; }</style>
+<body onload='init()' style="background-color:lightgray;">
 
-<body>
-    
-    <svg width=300 height=300>
-    </svg>
-    
-    <script>
-        // var data = [4,8,15,16,23,42];
-        var margin = 200,
-        width = 300 - 2*margin,
-        height = 300 - 2*margin;
+<h1>Airbnb Listings Data Visualization</h1>
 
+<p>This data visualization project explores listings data for New York City on Airbnb, a platform for finding places to stay around the world.
+</p>
 
-        var svg = d3.select("svg")
-        .attr("width",width + 2*margin)
-        .attr("height",height + 2*margin)
+<p>I chose to focus on New York City for this project for a few reasons. I live there, so I have a personal interest. It is also the largest 
+    city in the United States and a huge tourist destination, so while it would narrow the scope of the data it would also leave me with a large
+    amount to analyze.
+</p>
 
-
-        d3.csv("data/cars2017.csv").then(function(data) {
-            var xScale = d3.scaleLinear().domain([0, 12]).range([0, width]),
-            yScale = d3.scaleLinear().domain([0, 130]).range([height, 0]);
-            
-            // Title
-            svg.append('text')
-            .attr('x', width/2 + 100)
-            .attr('y', 100)
-            .attr('text-anchor', 'middle')
-            .style('font-family', 'Helvetica')
-            .style('font-size', 20)
-            .text('Line Chart');
-
-             // X label
-            svg.append('text')
-            .attr('x', width/2 + 100)
-            .attr('y', height - 15 + 150)
-            .attr('text-anchor', 'middle')
-            .style('font-family', 'Helvetica')
-            .style('font-size', 12)
-            .text('EngineCylinders');
-
-            // Y label
-            svg.append('text')
-            .attr('text-anchor', 'middle')
-            .attr('transform', 'translate(60,' + height + ')rotate(-90)')
-            .style('font-family', 'Helvetica')
-            .style('font-size', 12)
-            .text('AverageHighwayMPG');
-
-            svg.append("g")
-             .attr("transform", "translate(0," + height + ")")
-             .call(d3.axisBottom(xScale));
-        
-            svg.append("g")
-             .call(d3.axisLeft(yScale));
-
-            svg.append("g")
-            .selectAll("dot")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("cx", function (d) { return xScale(d.EngineCylinders); } )
-            .attr("cy", function (d) { return yScale(d.AverageHighwayMPG); } )
-            .attr("r", 2)
-            .attr("transform", "translate(" + 100 + "," + 100 + ")")
-            .style("fill", "#CC0000");
-
-    
-
-        });
-        
-        // .selectAll("rect")
-        // .data(data)
-        // .enter()
-        // .append("rect")
-        // .attr("x", function(d,i) {return x(i); })
-        // .attr("y", function(d) {return y(d); })
-        // .attr("width", x.bandwidth())
-        // .attr("height", function(d) {return height - y(d); });
-
-    
-    </script>
-    
 </body>
-
 
 </html>
