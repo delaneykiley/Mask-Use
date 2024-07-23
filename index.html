@@ -83,7 +83,7 @@ async function init() {
         .attr("class", "group")
         .attr("transform", d => `translate(${xScale1(d.neighbourhood_group)}, 0)`)
         .selectAll(".bar")
-        .data(d => [d['number_of_reviews'])
+        .data(d => [d['number_of_reviews']])
         .enter()
         .append("rect")
         .attr("class", "bar")
