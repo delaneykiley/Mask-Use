@@ -4,26 +4,24 @@
 
 <body onload='init()' style="background-color:lightgray;">
 
-<h1>Airbnb Listings Data Visualization</h1>
+<h1>Top Grossing Movies Data Visualization</h1>
 
-<p>This data visualization project explores listings data for New York City on Airbnb, a platform for finding places to stay around the world.
+<p>This data visualization project explores data on the top grossing movies of all time.
 </p>
 
-<p>I chose to focus on New York City for this project for a few reasons. I live there, so I have a personal interest. It is also the largest 
-    city in the United States and a huge tourist destination, so while it would narrow the scope of the data it would also leave me with a large
-    amount to analyze.
+<p>As a movie lover, I thought it would be interesting to dive deeper into attributes of the top grossing movies.
 </p>
 
 <div id="datacontainer"></div>
 
-<div id="neighborhoods"></div>
+<div id="top_grossers"></div>
 
-<h1 id="neighborhoods_header">Data by Neighborhood</h1>
+<h1 id="top_grossers_header">Top 10 Earners</h1>
 
 <svg id="chart1" width="1500" height="400"></svg>
 
 <p>
-    Placeholder text for neighborhood breakdown
+    Placeholder text for top 10 earners breakdown
 </p>
 
 <br><br><br><br><br>
@@ -32,25 +30,14 @@
 
 async function init() {
 
-    const data = await d3.csv('listings.csv');
+    const data = await d3.csv('movies.csv');
 
-    // Filter data by borough
-    const manhattanData = data.filter(row => 
-        row.neighbourhood_group == "Manhattan");
-    const brooklynData = data.filter(row => 
-        row.neighbourhood_group == "Brooklyn");
-    const queensData = data.filter(row => 
-        row.neighbourhood_group == "Queens");
-    const bronxData = data.filter(row => 
-        row.neighbourhood_group == "Bronx");
-    const siData = data.filter(row => 
-        row.neighbourhood_group == "Staten Island");
+    // Filter data for top 10
+    const topTen = data.filter(row => 
+        row.Rank >= 9);
 
-    console.log(manhattanData.length);
-    console.log(brooklynData.length);
-    console.log(queensData.length);
-    console.log(bronxData.length);
-    console.log(siData.length);
+    console.log(topTen);
+
 
 
     // Universal chart dimensions
@@ -67,12 +54,12 @@ async function init() {
         .attr("height", svgHeight);
 
     const xScale1 = d3.scaleBand()
-        .domain(data.map(d => d.neighbourhood_group))
+        .domain(data.map(d => d.Movie_Name))
         .range([margin.left, chartWidth + margin.left])
         .padding(0.1);
 
     const yScale1 = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d['number_of_reviews'])])
+    .domain([0, d3.max(data, d => d['Lifetime_Gross'])])
     .range([chartHeight, 0]);
 
     const xAxis1 = d3.axisBottom(xScale1);
@@ -91,9 +78,9 @@ async function init() {
         .enter()
         .append("g")
         .attr("class", "group")
-        .attr("transform", d => `translate(${xScale1(d.neighbourhood_group)}, 0)`)
+        .attr("transform", d => `translate(${xScale1(d.Movie_Name)}, 0)`)
         .selectAll(".bar")
-        .data(d => [d['number_of_reviews']])
+        .data(d => [d['Lifetime_Gross']])
         .enter()
         .append("rect")
         .attr("class", "bar")
@@ -101,7 +88,7 @@ async function init() {
         .attr("y", d => yScale1(d))
         .attr("width", xScale1.bandwidth() / 2)
         .attr("height", d => chartHeight + margin.top - yScale1(d))
-        .attr("fill", (d, i) => ["steelblue", "orange"][i]);
+        .attr("fill", (d, i) => ["steelblue"][i]);
 
 
 
