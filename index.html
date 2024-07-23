@@ -34,8 +34,12 @@ async function init() {
 
     const data = await d3.csv('listings.csv');
 
+    const filteredData = data.filter(row => 
+        row.number_of_reviews >= 100 && 
+        row.neighbourhood_group == "Manhattan");
 
-    console.log(data);
+
+    console.log(filteredData);
 
 }
 
