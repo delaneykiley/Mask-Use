@@ -74,7 +74,7 @@ async function init() {
         .call(yAxis1);
 
     svg1.selectAll(".group")
-        .data(data)
+        .data(topTen)
         .enter()
         .append("g")
         .attr("class", "group")
