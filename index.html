@@ -59,7 +59,7 @@ async function init() {
         .padding(0.1);
 
     const yScale1 = d3.scaleLinear()
-    .domain([0, d3.max(topTen, d => d['Lifetime_Gross']))])
+    .domain([0, d3.max(topTen, d => d['Lifetime_Gross'])])
     .range([chartHeight, 0]);
 
     const xAxis1 = d3.axisBottom(xScale1);
