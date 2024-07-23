@@ -59,7 +59,7 @@ async function init() {
         .padding(0.1);
 
     const yScale1 = d3.scaleLinear()
-    .domain([0, d3.max(topTen, d => Math.max(d['Lifetime_Gross'], d['Budget']))])
+    .domain([0, d3.max(topTen, d => d['Lifetime_Gross']))])
     .range([chartHeight, 0]);
 
     const xAxis1 = d3.axisBottom(xScale1);
@@ -80,7 +80,7 @@ async function init() {
         .attr("class", "group")
         .attr("transform", d => `translate(${xScale1(d.Movie_Name)}, 0)`)
         .selectAll(".bar")
-        .data(d => [d['Lifetime_Gross'], d['Budget']])
+        .data(d => [d['Lifetime_Gross']])
         .enter()
         .append("rect")
         .attr("class", "bar")
@@ -88,7 +88,7 @@ async function init() {
         .attr("y", d => yScale1(d))
         .attr("width", xScale1.bandwidth() / 2)
         .attr("height", d => chartHeight + margin.top - yScale1(d))
-        .attr("fill", (d, i) => ["steelblue", "orange"][i]);
+        .attr("fill", (d, i) => ["steelblue"][i]);
 
 
 
