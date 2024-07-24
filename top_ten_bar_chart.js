@@ -16,15 +16,15 @@ var svg = d3.select(barSelector)
 
 
 const topTen = d3.csv("movies.csv");
-topTen.then(function(topTen) {
+topTen.then(function(data) {
 
   // topTen Filtering
-  topTen =  topTen.filter(function(d){ return d.Rank <= 9 })
-  var topTenGrosses = d3.map(topTen, function(d){ return d.Lifetime_Gross; }).keys();
+  topTen =  data.filter(function(d){ return d.Rank <= 9 })
+  var topTenGrosses = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
 
   // X and Y plus Axises
   var x = d3.scaleBand()
-    .domain(topTen.map(function(d) { return d.Movie_Name}))
+    .domain(data.map(function(d) { return d.Movie_Name}))
     .range([0, width])
     .padding(0.2);
 
@@ -119,7 +119,7 @@ topTen.then(function(topTen) {
   // Creating Colors
   var size = 20
   svg.selectAll("dots")
-    .topTen(labels)
+    .data(labels)
     .enter()
     .append("rect")
       .attr("x", width * 0.85)
@@ -130,7 +130,7 @@ topTen.then(function(topTen) {
 
   // Creating Text
   svg.selectAll("labels")
-    .topTen(labels)
+    .data(labels)
     .enter()
     .append("text")
       .attr("x", width * 0.85 + size * 1.2)
