@@ -1,4 +1,7 @@
-var barSelector = document.querySelector("#chart1");
+// Overal Structure and Animation of bargraph was inspired by this link
+// https://www.d3-graph-gallery.com/graph/barplot_basic.html
+
+var barSelector = document.querySelector("#chart");
 
 // Dimensions
 var margin = {top: 10, right: 60, bottom: 160, left: 150},
@@ -15,16 +18,12 @@ var svg = d3.select(barSelector)
         "translate(" + margin.left + "," + margin.top + ")");
 
 
-const movieData = d3.csv("movies.csv");
-const topTenFilteredData = movieData.filter(row => 
-        row.Rank <= 19);
+const DATA = d3.csv("movies.csv");
+DATA.then(function(data) {
 
-movieData.then(function(data) {
-
-  // movieData Filtering
+  // Data Filtering
   data =  data.filter(function(d){ return d.Lifetime_Gross >= 1000000000 })
-  var movieDataGrosses = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
- 
+  var boxOfficeList = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
 
   // X and Y plus Axises
   var x = d3.scaleBand()
@@ -33,7 +32,7 @@ movieData.then(function(data) {
     .padding(0.2);
 
   var y = d3.scaleLinear()
-    .domain([Math.min(...movieDataGrosses) - 10000000, Math.max(...movieDataGrosses)])
+    .domain([Math.min(...boxOfficeList) - 10000000, Math.max(...boxOfficeList)])
     .range([height,0])
 
   svg.append("g")
@@ -77,8 +76,8 @@ movieData.then(function(data) {
 
   // Tooltip code was inspired from the following links
   // https://www.d3-graph-gallery.com/graph/circularpacking_template.html
-  // https://www.linkedin.com/learning/d3-js-essential-training-for-movieData-scientists/making-your-graphic-responsive?u=43607124
-  var tooltip = d3.select("#chart1")
+  // https://www.linkedin.com/learning/d3-js-essential-training-for-data-scientists/making-your-graphic-responsive?u=43607124
+  var tooltip = d3.select("#chart")
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
@@ -173,3 +172,7 @@ movieData.then(function(data) {
   }
 
 });
+
+
+
+
