@@ -90,6 +90,47 @@ async function init() {
         .attr("height", d => chartHeight + margin.top - yScale1(d))
         .attr("fill", (d, i) => ["steelblue"][i]);
 
+    // Tooltip functionality
+    var tooltip = d3.select("#chart1")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("position", "absolute")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px");
+
+    svg1.selectAll("rect")
+    .on("mouseover", function(d) { this.style.opacity = 1; tooltipFunction(d, "over");})
+    .on("mousemove", function(d) { tooltipFunction(d, "move");})
+    .on("mouseout", function(d) { this.style.opacity = 0.5; tooltipFunction(d, "out");})
+
+    function tooltipFunction(d, action) {
+
+      switch (action) {
+        case "over":
+          tooltip.style("opacity", 1);
+          return;
+        case "move":
+
+          tooltip.html('<u>' + d.Movie_Name + '</u>'
+                      + "<br>" + "Box Office Rank: "+ d.Rank
+                      + "<br>" + "Lifetime Gross: $"+ grossToString(d.Lifetime_Gross)
+                      + "<br>" + "Release Year: "+ d.Year
+                      + "<br>" + "Director: "+ d.Director
+                      + "<br>" + "Studio: "+ d.US_Distributor
+                      + "<br>" + "MPAA: "+ d.MPAA
+                      + "<br>" + "Run Time: "+ d.Running_Time)
+            .style('top', (d3.event.pageY + 10) + 'px')
+            .style('left', (d3.event.pageX + 10) + 'px');
+          return;
+        default:
+          tooltip.style("opacity", 0);
+      }
+  }
+
 
 
 
