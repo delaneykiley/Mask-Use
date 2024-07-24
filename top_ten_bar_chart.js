@@ -1,4 +1,4 @@
-var barChartDiv = document.querySelector("#chart1");
+var barSelector = document.querySelector("#chart1");
 
 // Dimensions
 var margin = {top: 10, right: 60, bottom: 160, left: 150},
@@ -6,7 +6,7 @@ var margin = {top: 10, right: 60, bottom: 160, left: 150},
     height = 500 - margin.top - margin.bottom;
 
 // Creating svg object
-var svg = d3.select(barChartDiv)
+var svg = d3.select(barSelector)
   .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
@@ -15,21 +15,21 @@ var svg = d3.select(barChartDiv)
         "translate(" + margin.left + "," + margin.top + ")");
 
 
-const DATA = d3.csv("movies.csv");
-DATA.then(function(data) {
+const topTen = d3.csv("movies.csv");
+topTen.then(function(topTen) {
 
-  // Data Filtering
-  data =  data.filter(function(d){ return d.Lifetime_Gross >= 1000000000 })
-  var boxOfficeList = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
+  // topTen Filtering
+  topTen =  topTen.filter(function(d){ return d.Rank <= 9 })
+  var topTenGrosses = d3.map(topTen, function(d){ return d.Lifetime_Gross; }).keys();
 
   // X and Y plus Axises
   var x = d3.scaleBand()
-    .domain(data.map(function(d) { return d.Movie_Name}))
+    .domain(topTen.map(function(d) { return d.Movie_Name}))
     .range([0, width])
     .padding(0.2);
 
   var y = d3.scaleLinear()
-    .domain([Math.min(...boxOfficeList) - 10000000, Math.max(...boxOfficeList)])
+    .domain([Math.min(...topTenGrosses) - 10000000, Math.max(...topTenGrosses)])
     .range([height,0])
 
   svg.append("g")
@@ -52,7 +52,7 @@ DATA.then(function(data) {
 
   // Initializing Bars
   svg.selectAll("rect")
-    .data(data)
+    .topTen(topTen)
     .enter()
     .append("rect")
       .attr("x", function(d) { return x(d.Movie_Name); })
@@ -73,8 +73,8 @@ DATA.then(function(data) {
 
   // Tooltip code was inspired from the following links
   // https://www.d3-graph-gallery.com/graph/circularpacking_template.html
-  // https://www.linkedin.com/learning/d3-js-essential-training-for-data-scientists/making-your-graphic-responsive?u=43607124
-  var tooltip = d3.select("#chart")
+  // https://www.linkedin.com/learning/d3-js-essential-training-for-topTen-scientists/making-your-graphic-responsive?u=43607124
+  var tooltip = d3.select("#chart1")
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
@@ -119,7 +119,7 @@ DATA.then(function(data) {
   // Creating Colors
   var size = 20
   svg.selectAll("dots")
-    .data(labels)
+    .topTen(labels)
     .enter()
     .append("rect")
       .attr("x", width * 0.85)
@@ -130,7 +130,7 @@ DATA.then(function(data) {
 
   // Creating Text
   svg.selectAll("labels")
-    .data(labels)
+    .topTen(labels)
     .enter()
     .append("text")
       .attr("x", width * 0.85 + size * 1.2)
