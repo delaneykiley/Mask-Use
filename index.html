@@ -131,6 +131,13 @@ async function init() {
       }
   }
 
+    // Code to transfer numeral to money representation string inspired from the following link
+  // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+  function grossToString(value) {
+
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
 
 
 
