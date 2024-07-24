@@ -1,148 +1,32 @@
 <!DOCTYPE html>
+<html>
 
-<script src='https://d3js.org/d3.v5.min.js'></script>
+  <head>
 
-<body onload='init()' style="background-color:lightgray;">
+    <title> Top Grossing Movies Data Visualization</title>
+    <h1 style="text-align:center"> </h1>
+    <script script src="https://d3js.org/d3.v5.min.js" aysnc></script>
 
-<h1>Top Grossing Movies Data Visualization</h1>
+    <p> This narrative visualization project explores data on the top grossing movies of all time.
 
-<p>This data visualization project explores data on the top grossing movies of all time.
-</p>
+  </head>
 
-<p>As a movie lover, I thought it would be interesting to dive deeper into attributes of the top grossing movies.
-</p>
+  <body "style="background-color:lightgray;">
 
-<div id="datacontainer"></div>
+    <div style="text-align: center;">
+        <a href="index2.html"><button>Scene 2</button></a>
+    </div>
+    <h3> Top 10 Earners </h3>
 
-<div id="top_grossers"></div>
+    <div id="chart"></div>
 
-<h1 id="top_grossers_header">Top 10 Earners</h1>
-
-<svg id="chart1" width="1500" height="400"></svg>
-
-<p>
-    Placeholder text for top 10 earners breakdown
-</p>
-
-<br><br><br><br><br>
-
-<script>
-
-async function init() {
-
-    const data = await d3.csv('movies.csv');
-
-    // Filter data for top 10
-    const topTen = data.filter(row => 
-        row.Rank <= 9);
-
-    console.log(topTen);
+    <p>
+      As a movie lover, I thought it would be interesting to dive deeper into attributes of the top grossing movies.
+    </p>
 
 
-
-    // Universal chart dimensions
-    const svgWidth = 1500;
-    const svgHeight = 400;
-    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const chartWidth = svgWidth - margin.left - margin.right;
-    const chartHeight = svgHeight - margin.top - margin.bottom;
+    <script src = "top_ten_bar_chart.js" aysnc></script>
 
 
-    // Chart 1: Listings by Borough
-    const svg1 = d3.select('#chart1')
-        .attr("width", svgWidth)
-        .attr("height", svgHeight);
-
-    const xScale1 = d3.scaleBand()
-        .domain(topTen.map(d => d.Movie_Name))
-        .range([margin.left, chartWidth + margin.left])
-        .padding(0.1);
-
-    const yScale1 = d3.scaleLinear()
-    .domain([0, d3.max(topTen, d => d['Lifetime_Gross'])])
-    .range([chartHeight, 0]);
-
-    const xAxis1 = d3.axisBottom(xScale1);
-    const yAxis1 = d3.axisLeft(yScale1);
-
-    svg1.append("g")
-        .attr("transform", "translate(0, 350)")
-        .call(xAxis1);
-
-    svg1.append("g")
-        .attr("transform", "translate(50, 0)")
-        .call(yAxis1);
-
-    svg1.selectAll(".group")
-        .data(topTen)
-        .enter()
-        .append("g")
-        .attr("class", "group")
-        .attr("transform", d => `translate(${xScale1(d.Movie_Name)}, 0)`)
-        .selectAll(".bar")
-        .data(d => [d['Lifetime_Gross']])
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", (d, i) => i * (xScale1.bandwidth() / 2))
-        .attr("y", d => yScale1(d))
-        .attr("width", xScale1.bandwidth() / 2)
-        .attr("height", d => chartHeight + margin.top - yScale1(d))
-        .attr("fill", (d, i) => ["steelblue"][i]);
-
-    // Tooltip functionality
-    var tooltip = d3.select("#chart1")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("position", "absolute")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "2px")
-    .style("border-radius", "5px")
-    .style("padding", "5px");
-
-    svg1.selectAll("rect")
-    .on("mouseover", function(d) { this.style.opacity = 1; tooltipFunction(d, "over");})
-    .on("mousemove", function(d) { tooltipFunction(d, "move");})
-    .on("mouseout", function(d) { this.style.opacity = 0.5; tooltipFunction(d, "out");})
-
-    function tooltipFunction(d, action) {
-
-      switch (action) {
-        case "over":
-          tooltip.style("opacity", 1);
-          return;
-        case "move":
-
-          tooltip.html('<u>' + d.Movie_Name + '</u>'
-                      + "<br>" + "Box Office Rank: "+ d.Rank
-                      + "<br>" + "Release Year: "+ d.Year
-                      + "<br>" + "Director: "+ d.Director
-                      + "<br>" + "Studio: "+ d.US_Distributor
-                      + "<br>" + "MPAA: "+ d.MPAA
-                      + "<br>" + "Run Time: "+ d.Running_Time)
-            .style('top', (d3.event.pageY + 10) + 'px')
-            .style('left', (d3.event.pageX + 10) + 'px');
-          return;
-        default:
-          tooltip.style("opacity", 0);
-      }
-  }
-
-  
-
-
-
-
-
-
-    
-
-}
-
-</script>
-
-</body>
-
+  </body>
 </html>
