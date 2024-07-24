@@ -19,7 +19,7 @@ const topTen = d3.csv("movies.csv");
 topTen.then(function(data) {
 
   // topTen Filtering
-  topTen =  data.filter(function(d){ return d.Rank <= 9 })
+  topTen =  topTen.filter(function(d){ return d.Rank <= 9 })
   var topTenGrosses = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
 
   // X and Y plus Axises
