@@ -56,7 +56,7 @@ topTenFilteredData.then(function(data) {
 
   // Initializing Bars
   svg.selectAll("rect")
-    .data(movieData)
+    .data(data)
     .enter()
     .append("rect")
       .attr("x", function(d) { return x(d.Movie_Name); })
