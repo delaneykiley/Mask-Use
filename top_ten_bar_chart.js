@@ -1,7 +1,7 @@
 // Overal Structure and Animation of bargraph was inspired by this link
 // https://www.d3-graph-gallery.com/graph/barplot_basic.html
 
-var barSelector = document.querySelector("#chart");
+var barSelector = document.querySelector("#chart1");
 
 // Dimensions
 var margin = {top: 10, right: 60, bottom: 160, left: 150},
@@ -77,7 +77,7 @@ DATA.then(function(data) {
   // Tooltip code was inspired from the following links
   // https://www.d3-graph-gallery.com/graph/circularpacking_template.html
   // https://www.linkedin.com/learning/d3-js-essential-training-for-data-scientists/making-your-graphic-responsive?u=43607124
-  var tooltip = d3.select("#chart")
+  var tooltip = d3.select("#chart1")
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
