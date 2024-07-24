@@ -15,12 +15,12 @@ var svg = d3.select(barSelector)
         "translate(" + margin.left + "," + margin.top + ")");
 
 
-const topTen = d3.csv("movies.csv");
-topTen.then(function(data) {
+const movieData = d3.csv("movies.csv");
+movieData.then(function(data) {
 
-  // topTen Filtering
-  topTen =  topTen.filter(function(d){ return d.Rank <= 9 })
-  var topTenGrosses = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
+  // movieData Filtering
+  data =  data.filter(function(d){ return d.Rank <= 9 })
+  var movieDataGrosses = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
 
   // X and Y plus Axises
   var x = d3.scaleBand()
@@ -29,7 +29,7 @@ topTen.then(function(data) {
     .padding(0.2);
 
   var y = d3.scaleLinear()
-    .domain([Math.min(...topTenGrosses) - 10000000, Math.max(...topTenGrosses)])
+    .domain([Math.min(...movieDataGrosses) - 10000000, Math.max(...movieDataGrosses)])
     .range([height,0])
 
   svg.append("g")
@@ -52,7 +52,7 @@ topTen.then(function(data) {
 
   // Initializing Bars
   svg.selectAll("rect")
-    .data(topTen)
+    .data(movieData)
     .enter()
     .append("rect")
       .attr("x", function(d) { return x(d.Movie_Name); })
@@ -73,7 +73,7 @@ topTen.then(function(data) {
 
   // Tooltip code was inspired from the following links
   // https://www.d3-graph-gallery.com/graph/circularpacking_template.html
-  // https://www.linkedin.com/learning/d3-js-essential-training-for-topTen-scientists/making-your-graphic-responsive?u=43607124
+  // https://www.linkedin.com/learning/d3-js-essential-training-for-movieData-scientists/making-your-graphic-responsive?u=43607124
   var tooltip = d3.select("#chart1")
     .append("div")
     .style("opacity", 0)
