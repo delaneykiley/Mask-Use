@@ -19,7 +19,7 @@ const movieData = d3.csv("movies.csv");
 const topTenFilteredData = movieData.filter(row => 
         row.Rank <= 19);
 
-movieData.then(function(data) {
+topTenFilteredData.then(function(data) {
 
   // movieData Filtering
   //data =  data.filter(function(d){ return d.Lifetime_Gross >= 1000000000 })
