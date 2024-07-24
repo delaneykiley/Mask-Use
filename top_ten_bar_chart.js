@@ -16,10 +16,13 @@ var svg = d3.select(barSelector)
 
 
 const movieData = d3.csv("movies.csv");
+const topTenFilteredData = movieData.filter(row => 
+        row.Rank <= 19);
+
 movieData.then(function(data) {
 
   // movieData Filtering
-  data =  data.filter(function(d){ return d.Lifetime_Gross >= 1000000000 })
+  //data =  data.filter(function(d){ return d.Lifetime_Gross >= 1000000000 })
   var movieDataGrosses = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
  
 
