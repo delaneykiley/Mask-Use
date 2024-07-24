@@ -52,7 +52,7 @@ topTen.then(function(topTen) {
 
   // Initializing Bars
   svg.selectAll("rect")
-    .topTen(topTen)
+    .data(topTen)
     .enter()
     .append("rect")
       .attr("x", function(d) { return x(d.Movie_Name); })
