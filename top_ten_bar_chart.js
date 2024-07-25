@@ -1,14 +1,10 @@
-// Overal Structure and Animation of bargraph was inspired by this link
-// https://www.d3-graph-gallery.com/graph/barplot_basic.html
 
-//var barSelector = document.querySelector("#chart1");
-
-// Dimensions
+// set margins and dimensions of graph
 var margin = {top: 10, right: 60, bottom: 160, left: 150},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-// Creating svg object
+// append svg object to '#chart1'
 var svg = d3.select("#chart1")
   .append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -172,6 +168,9 @@ DATA.then(function(data) {
   }
 
 });
+
+
+// structure of graph inspired by information at https://www.d3-graph-gallery.com/graph/barplot_basic.html
 
 
 
