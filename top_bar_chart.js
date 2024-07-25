@@ -42,11 +42,12 @@ movieData.then(function(data) {
     .call(d3.axisLeft(y));
 
   // Coloring Bars
-  var labels = ["Walt Disney Studios", "NBCUniversal", "ViacomCBS", "WarnerMedia", "Sony Pictures", "Mini-majors", "Other"];
+  //var labels = ["Walt Disney Studios", "NBCUniversal", "ViacomCBS", "WarnerMedia", "Sony Pictures", "Mini-majors", "Other"];
+    var year_bands = ["1990-1994", "1995-1999", "2000-2004", "2005-2009", "2010-2014", "2015-2019", "Other"];
 
-  // Color coding the values based on Studio Parent
+  // Color coding the values based on release year band
   var color = d3.scaleOrdinal()
-    .domain(labels)
+    .domain(year_bands)
     .range(d3.schemeDark2)
 
   // Initializing Bars
@@ -58,7 +59,7 @@ movieData.then(function(data) {
       .attr("y", function(d) { return height; })
       .attr("width", x.bandwidth())
       .attr("height", function(d) { return 0; })
-      .attr("fill", function (d) { return color(studioParentFinder(d.US_Distributor)); })
+      .attr("fill", function (d) { return color(findYearBand(d.Year)); })
       .attr("opacity", 0.5);
 
   // Loading Bars with Animation
@@ -118,7 +119,7 @@ movieData.then(function(data) {
   // Creating Colors
   var size = 20
   svg.selectAll("dots")
-    .data(labels)
+    .data(year_bands)
     .enter()
     .append("rect")
       .attr("x", width * 0.85)
@@ -129,7 +130,7 @@ movieData.then(function(data) {
 
   // Creating Text
   svg.selectAll("labels")
-    .data(labels)
+    .data(year_bands)
     .enter()
     .append("text")
       .attr("x", width * 0.85 + size * 1.2)
@@ -140,25 +141,42 @@ movieData.then(function(data) {
       .style("alignment-baseline", "middle")
 
 
-  // Helper Function to find Studio Parent from distributor
-  function studioParentFinder(distributor) {
+  // Helper Function to release year band for legend
+    function findYearBand(yr) {
+        var band_one = ["1990", "1991", "1992", "1993", "1994"];
+        var band_two = ["1995", "1996", "1997", "1998", "1999"];
+        var band_three = ["2000", "2001", "2002", "2003", "2004"];
+        var band_four = ["2005", "2006", "2007", "2008", "2009"];
+        var band_five = ["2010", "2011", "2012", "2013", "2014"];
+        var band_six = ["2015", "2016", "2017", "2018", "2019"];
 
-      var disney = ["Walt Disney Studios Motion Pictures", "Twentieth Century Fox", "Fox Searchlight Pictures", "UTV Motion Pictures"];
-      var universal = ["Universal Pictures", "Focus Features", "Gramercy Pictures (I)", "USA Films", "FilmDistrict"]
-      var viacom = ["Paramount Pictures", "Miramax"]
-      var warner = ["Warner Bros.", "New Line Cinema"]
-      var sony = ["Sony Pictures Releasing", "TriStar Pictures", "Screen Gems", "Columbia Pictures", "Sony Pictures Classics", "FUNimation Entertainment"]
-      var miniMajor = ["DreamWorks", "DreamWorks Distribution", "Lionsgate", "Summit Entertainment", "Artisan Entertainment", "Metro-Goldwyn-Mayer (MGM)", "Orion Pictures", "United Artists", "United Artists Releasing", "STX Entertainment"]
+        var options = [band_one, band_two, band_three, band_four, band_five, band_six];
 
-      var groups = [disney, universal, viacom, warner, sony, miniMajor];
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].includes(yr)) { return year_bands[i]; }
+        }
+        return "Other";
+    }
 
-      for (var i = 0; i < groups.length; i++) {
+        
+  // function studioParentFinder(distributor) {
 
-        if (groups[i].includes(distributor)) { return labels[i]; }
-      }
+  //     var disney = ["Walt Disney Studios Motion Pictures", "Twentieth Century Fox", "Fox Searchlight Pictures", "UTV Motion Pictures"];
+  //     var universal = ["Universal Pictures", "Focus Features", "Gramercy Pictures (I)", "USA Films", "FilmDistrict"]
+  //     var viacom = ["Paramount Pictures", "Miramax"]
+  //     var warner = ["Warner Bros.", "New Line Cinema"]
+  //     var sony = ["Sony Pictures Releasing", "TriStar Pictures", "Screen Gems", "Columbia Pictures", "Sony Pictures Classics", "FUNimation Entertainment"]
+  //     var miniMajor = ["DreamWorks", "DreamWorks Distribution", "Lionsgate", "Summit Entertainment", "Artisan Entertainment", "Metro-Goldwyn-Mayer (MGM)", "Orion Pictures", "United Artists", "United Artists Releasing", "STX Entertainment"]
 
-      return "Other";
-  }
+  //     var groups = [disney, universal, viacom, warner, sony, miniMajor];
+
+  //     for (var i = 0; i < groups.length; i++) {
+
+  //       if (groups[i].includes(distributor)) { return labels[i]; }
+  //     }
+
+  //     return "Other";
+  // }
 
   // Code to transfer numeral to money representation string inspired from the following link
   // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
