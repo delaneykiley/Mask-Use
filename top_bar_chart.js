@@ -19,7 +19,7 @@ movieData.then(function(data) {
 
   // filter data for top 20 grossing movies
   data =  data.filter(function(d){ return d.Rank <= 29 })
-  var boxOfficeList = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
+  var movieGrosses = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
 
   // create X, Y axes
   var x = d3.scaleBand()
@@ -28,7 +28,7 @@ movieData.then(function(data) {
     .padding(0.2);
 
   var y = d3.scaleLinear()
-    .domain([Math.min(...boxOfficeList) - 10000000, Math.max(...boxOfficeList)])
+    .domain([Math.min(...movieGrosses) - 10000000, Math.max(...movieGrosses)])
     .range([height,0])
 
   svg.append("g")
