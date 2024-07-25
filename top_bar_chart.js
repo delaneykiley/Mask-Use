@@ -47,7 +47,7 @@ movieData.then(function(data) {
   // Color coding the values based on Studio Parent
   var color = d3.scaleOrdinal()
     .domain(labels)
-    .range(d3.schemePaired)
+    .range(d3.schemeDark2)
 
   // Initializing Bars
   svg.selectAll("rect")
