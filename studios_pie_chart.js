@@ -1,5 +1,4 @@
 
-
 // set margins and dimensions of graph
 var width = 1200
     height = 500
@@ -64,3 +63,5 @@ function update(data) {
 // Initialize the plot with the first dataset
 update(data1)
 
+
+// structure of graph inspired by information at https://d3-graph-gallery.com/graph/pie_changeData.html
