@@ -41,16 +41,14 @@ movieData.then(function(data) {
   svg.append("g")
     .call(d3.axisLeft(y));
 
-  // Coloring Bars
-  //var labels = ["Walt Disney Studios", "NBCUniversal", "ViacomCBS", "WarnerMedia", "Sony Pictures", "Mini-majors", "Other"];
-    var year_bands = ["1990-1994", "1995-1999", "2000-2004", "2005-2009", "2010-2014", "2015-2019", "Other"];
 
-  // Color coding the values based on release year band
-  var color = d3.scaleOrdinal()
+    // create five-year bands and color according to scheme
+    var year_bands = ["1990-1994", "1995-1999", "2000-2004", "2005-2009", "2010-2014", "2015-2019", "Pre-1990"];
+    var color = d3.scaleOrdinal()
     .domain(year_bands)
     .range(d3.schemeDark2)
 
-  // Initializing Bars
+  // create bars for bar chart
   svg.selectAll("rect")
     .data(data)
     .enter()
@@ -62,7 +60,7 @@ movieData.then(function(data) {
       .attr("fill", function (d) { return color(findYearBand(d.Year)); })
       .attr("opacity", 0.5);
 
-  // Loading Bars with Animation
+  // load bars on a delay with animation
   svg.selectAll("rect")
     .transition()
     .duration(500)
@@ -71,9 +69,7 @@ movieData.then(function(data) {
     .delay(function(d,i) { return (i*100); });
 
 
-  // Tooltip code was inspired from the following links
-  // https://www.d3-graph-gallery.com/graph/circularpacking_template.html
-  // https://www.linkedin.com/learning/d3-js-essential-training-for-data-scientists/making-your-graphic-responsive?u=43607124
+  // create tooltip
   var tooltip = d3.select("#chart1")
     .append("div")
     .style("opacity", 0)
@@ -114,9 +110,9 @@ movieData.then(function(data) {
       }
   }
 
-  // Legend Code was inspired by the following link
-  // https://www.d3-graph-gallery.com/graph/custom_legend.html
-  // Creating Colors
+
+    
+  // initialize year gap legend on bar chart
   var size = 20
   svg.selectAll("dots")
     .data(year_bands)
@@ -128,7 +124,7 @@ movieData.then(function(data) {
       .attr("height", size)
       .style("fill", function(d){ return color(d)})
 
-  // Creating Text
+  // initialize text for legend
   svg.selectAll("labels")
     .data(year_bands)
     .enter()
@@ -141,7 +137,7 @@ movieData.then(function(data) {
       .style("alignment-baseline", "middle")
 
 
-  // Helper Function to release year band for legend
+  // helper function to look up a movie's release year band for legend
     function findYearBand(yr) {
         var band_one = ["1990", "1991", "1992", "1993", "1994"];
         var band_two = ["1995", "1996", "1997", "1998", "1999"];
@@ -155,31 +151,12 @@ movieData.then(function(data) {
         for (var i = 0; i < options.length; i++) {
             if (options[i].includes(yr)) { return year_bands[i]; }
         }
-        return "Other";
+        return "Pre-1990";
     }
+    
 
-        
-  // function studioParentFinder(distributor) {
-
-  //     var disney = ["Walt Disney Studios Motion Pictures", "Twentieth Century Fox", "Fox Searchlight Pictures", "UTV Motion Pictures"];
-  //     var universal = ["Universal Pictures", "Focus Features", "Gramercy Pictures (I)", "USA Films", "FilmDistrict"]
-  //     var viacom = ["Paramount Pictures", "Miramax"]
-  //     var warner = ["Warner Bros.", "New Line Cinema"]
-  //     var sony = ["Sony Pictures Releasing", "TriStar Pictures", "Screen Gems", "Columbia Pictures", "Sony Pictures Classics", "FUNimation Entertainment"]
-  //     var miniMajor = ["DreamWorks", "DreamWorks Distribution", "Lionsgate", "Summit Entertainment", "Artisan Entertainment", "Metro-Goldwyn-Mayer (MGM)", "Orion Pictures", "United Artists", "United Artists Releasing", "STX Entertainment"]
-
-  //     var groups = [disney, universal, viacom, warner, sony, miniMajor];
-
-  //     for (var i = 0; i < groups.length; i++) {
-
-  //       if (groups[i].includes(distributor)) { return labels[i]; }
-  //     }
-
-  //     return "Other";
-  // }
-
-  // Code to transfer numeral to money representation string inspired from the following link
-  // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+  // helper function to adapt number representation of Lifetime_Gross to string representation
+  // code adapted from https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
   function grossToString(value) {
 
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
