@@ -95,13 +95,10 @@ movieData.then(function(data) {
         case "move":
 
           tooltip.html('<u>' + d.Movie_Name + '</u>'
-                      + "<br>" + "Box Office Rank: "+ d.Rank
-                      + "<br>" + "Lifetime Gross: $"+ grossToString(d.Lifetime_Gross)
+                      + "<br>" + "Total Lifetime Gross: $"+ grossToString(d.Lifetime_Gross)
+                      + "<br>" + "Budget: "+ d.Budget
                       + "<br>" + "Release Year: "+ d.Year
-                      + "<br>" + "Director: "+ d.Director
-                      + "<br>" + "Studio: "+ d.US_Distributor
-                      + "<br>" + "MPAA: "+ d.MPAA
-                      + "<br>" + "Run Time: "+ d.Running_Time)
+                      + "<br>" + "Genre: "+ d.Genre)
             .style('top', (d3.event.pageY + 10) + 'px')
             .style('left', (d3.event.pageX + 10) + 'px');
           return;
