@@ -13,9 +13,9 @@ var svg = d3.select("#chart1")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-
-const DATA = d3.csv("movies.csv");
-DATA.then(function(data) {
+// load data from movies.csv
+const movieData = d3.csv("movies.csv");
+movieData.then(function(data) {
 
   // Data Filtering
   data =  data.filter(function(d){ return d.Rank <= 9 })
