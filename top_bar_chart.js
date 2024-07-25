@@ -94,7 +94,7 @@ movieData.then(function(data) {
           return;
         case "move":
 
-          tooltip.html('<u>' + d.Movie_Name + '</u>'
+          tooltip.html('<i>' + d.Movie_Name + '</i>'
                       + "<br>" + "Total Lifetime Gross: $"+ grossToString(d.Lifetime_Gross)
                       + "<br>" + "Budget: "+ d.Budget
                       + "<br>" + "Release Year: "+ d.Year
