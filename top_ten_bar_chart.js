@@ -17,11 +17,11 @@ var svg = d3.select("#chart1")
 const movieData = d3.csv("movies.csv");
 movieData.then(function(data) {
 
-  // Data Filtering
+  // filter data for top 20 grossing movies
   data =  data.filter(function(d){ return d.Rank <= 19 })
   var boxOfficeList = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
 
-  // X and Y plus Axises
+  // create X, Y axes
   var x = d3.scaleBand()
     .domain(data.map(function(d) { return d.Movie_Name}))
     .range([0, width])
@@ -47,7 +47,7 @@ movieData.then(function(data) {
   // Color coding the values based on Studio Parent
   var color = d3.scaleOrdinal()
     .domain(labels)
-    .range(d3.schemeTableau10)
+    .range(d3.schemePastel1)
 
   // Initializing Bars
   svg.selectAll("rect")
