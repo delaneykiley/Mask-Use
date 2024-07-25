@@ -43,7 +43,7 @@ movieData.then(function(data) {
 
 
     // create five-year bands and color according to scheme
-    var year_bands = ["1990-1994", "1995-1999", "2000-2004", "2005-2009", "2010-2014", "2015-2019", "Pre-1990"];
+    var year_bands = ["Pre-1990", "1990-1994", "1995-1999", "2000-2004", "2005-2009", "2010-2014", "2015-2019"];
     var color = d3.scaleOrdinal()
     .domain(year_bands)
     .range(d3.schemeDark2)
