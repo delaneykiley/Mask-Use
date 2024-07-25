@@ -18,7 +18,7 @@ const movieData = d3.csv("movies.csv");
 movieData.then(function(data) {
 
   // Data Filtering
-  data =  data.filter(function(d){ return d.Rank <= 9 })
+  data =  data.filter(function(d){ return d.Rank <= 19 })
   var boxOfficeList = d3.map(data, function(d){ return d.Lifetime_Gross; }).keys();
 
   // X and Y plus Axises
