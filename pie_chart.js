@@ -78,7 +78,30 @@ function update(data) {
     u
     .on('mousemove', function(d) { tooltipFunction(d, "move")})
     u
-    .on('mouseout', function(d) { this.style.opacity = 0.5; tooltipFunction(d, "out") });
+
+    
+    var size = 20
+  svg.selectAll("dots")
+    .data(year_band_labels)
+    .enter()
+    .append("rect")
+      .attr("x", width * 0.25)
+      .attr("y", function(d,i){ return height * 0.00000001 + i*(size+5)})
+      .attr("width", size)
+      .attr("height", size)
+      .style("fill", function(d){ return color(d)})
+
+  // Creating Text
+  svg.selectAll("labels")
+    .data(year_band_labels)
+    .enter()
+    .append("text")
+      .attr("x", width * 0.25 + size * 1.2)
+      .attr("y", function(d,i){ return height * 0.00000001 + i*(size+5) + (size * 0.5)})
+      .style("fill", "black")
+      .text(function(d){ return d})
+      .attr("text-anchor", "left")
+      .style("alignment-baseline", "middle")
 
     u
     .exit()
