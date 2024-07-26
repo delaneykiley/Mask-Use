@@ -73,10 +73,18 @@ function update(data) {
     .style("stroke-width", "2px")
     .style("opacity", 1)
 
-    
-  u
+    u
+    .on('mouseover', function(d) { this.style.opacity = 1; tooltipFunction(d, "over")})
+    u
+    .on('mousemove', function(d) { tooltipFunction(d, "move")})
+    u
+    .on('mouseout', function(d) { this.style.opacity = 0.5; tooltipFunction(d, "out") });
+
+    u
     .exit()
     .remove()
+
+    
 
 }
 
