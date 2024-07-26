@@ -31,6 +31,18 @@ var color = d3.scaleOrdinal()
   .domain(year_band_labels)
   .range(d3.schemeDark2);
 
+// create tooltip and append to 'chart2'
+var tooltip = d3.select("#chart2")
+  .append("div")
+  .style("opacity", 0)
+  .attr("class", "tooltip")
+  .style("position", "absolute")
+  .style("background-color", "white")
+  .style("border", "solid")
+  .style("border-width", "2px")
+  .style("border-radius", "5px")
+  .style("padding", "5px");
+
 // create and update the pie chart for input data variable
 function update(data) {
 
@@ -66,6 +78,27 @@ function update(data) {
     .exit()
     .remove()
 
+}
+
+function tooltipFunction(d, action) {
+
+  switch (action) {
+    case "over":
+
+      tooltip.style("opacity", 1);
+      return;
+    case "move":
+
+        tooltip.html('<u>' + d.data.key + '</u>');
+
+
+
+      tooltip.style('top', (d3.event.pageY + 10) + 'px')
+              .style('left', (d3.event.pageX + 10) + 'px');
+      return;
+    default:
+      tooltip.style("opacity", 0);
+  }
 }
 
 // Initialize the plot with the dataset
