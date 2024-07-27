@@ -15,7 +15,7 @@ var svg = d3.select("#chart2")
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-// create 2 data_set
+// create list of labels for hard coded data
 var year_band_labels = ["1920-1924", "1925-1929", "1930-1934", "1935-1939", "1940-1944", "1945-1949", "1950-1954", "1955-1959", 
                        "1960-1964", "1965-1969", "1970-1974", "1975-1979", "1980-1984", "1985-1989", "1990-1994", "1995-1999",
                        "2000-2004", "2005-2009", "2010-2014", "2015-2019", "Other"]
@@ -26,7 +26,7 @@ var yearsDict = {"2015-2020": 256, "2005-2009": 161, "1995-1999": 101, "2010-201
                  "1985-1989": 25, "1970-1974": 2, "1935-1939": 2, "1940-1944": 1, "1960-1964": 1, "1965-1969": 1}
 
 
-// set the color scale to given scheme
+// set the color scale to a d3 scheme
 var color = d3.scaleOrdinal()
   .domain(year_band_labels)
   .range(d3.schemeDark2);
