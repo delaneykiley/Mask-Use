@@ -29,7 +29,9 @@ var yearsDict = {"2015-2020": 256, "2005-2009": 161, "1995-1999": 101, "2010-201
 // set the color scale to a d3 scheme
 var color = d3.scaleOrdinal()
   .domain(year_band_labels)
-  .range(d3.schemeDark2);
+  .range(["aquamarine", "black", "blanchedalmond", "blue", "blueviolet", "brown", "burlywood", "cadetblue", 
+         "chartreuse", "coral", "cornflowerblue", "crimson", "darkcyan", "darkmagenta", "darkolivegreen", "darkorchid", 
+          "deeppink", "deepskyblue", "forestgreen", "goldenrod", "hotpink", "indianred", "indigo", "lemonchiffon"]);
 
 // create tooltip and append to '#chart2'
 var tooltip = d3.select("#chart2")
