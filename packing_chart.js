@@ -30,7 +30,7 @@ yearData.then( function(data) {
     var counts = d3.map(data, function(d){ return d.Count; }).keys();
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([Math.min(...counts) - 10000000, Math.max(...counts)])
+    .domain(0, 60)
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
