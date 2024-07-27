@@ -14,20 +14,23 @@ var svg = d3.select("#chart3")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+var years = ["2020", "2019", "2018"]
+
 //Read the data
 d3.csv("ind_year_data.csv", function(data) {
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([1920, 2020])
+    .domain(data.map(function(d) { return d.Year}))
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
 
+    var counts = d3.map(data, function(d){ return d.Count; }).keys();
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 1000])
+    .domain([Math.min(...counts) - 10000000, Math.max(...counts)])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
