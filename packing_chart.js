@@ -14,15 +14,14 @@ var svg = d3.select("chart3")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-yearDict = {
 
 // Read data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/11_SevCatOneNumNestedOneObsPerGroup.csv", function(data) {
+d3.csv("ind_year_data.csv", function(data) {
 
 
   // Color palette for continents?
   var color = d3.scaleOrdinal()
-    .domain(["Asia", "Europe", "Africa", "Oceania", "Americas"])
+    .domain(1920,2020)
     .range(d3.schemeSet1);
 
   // Size scale for countries
@@ -31,7 +30,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     .range([7,55])  // circle will be between 7 and 55 px wide
 
   // create a tooltip
-  var Tooltip = d3.select("#my_dataviz")
+  var Tooltip = d3.select("#chart3")
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
@@ -48,7 +47,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
   }
   var mousemove = function(d) {
     Tooltip
-      .html('<u>' + d.key + '</u>' + "<br>" + d.value + " inhabitants")
+      .html('<u>' + d.Year + '</u>' + "<br>" + d.Count)
       .style("left", (d3.mouse(this)[0]+20) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
   }
@@ -64,10 +63,10 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     .enter()
     .append("circle")
       .attr("class", "node")
-      .attr("r", function(d){ return size(d.value)})
+      .attr("r", function(d){ return size(d.Count)})
       .attr("cx", width / 2)
       .attr("cy", height / 2)
-      .style("fill", function(d){ return color(d.region)})
+      .style("fill", function(d){ return color(d.Year)})
       .style("fill-opacity", 0.8)
       .attr("stroke", "black")
       .style("stroke-width", 1)
