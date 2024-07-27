@@ -82,7 +82,7 @@ function update(data) {
     u
 
     
-    var size = 18
+    var size = 14
   svg.selectAll("dots")
     .data(year_band_labels)
     .enter()
