@@ -1,6 +1,6 @@
-<script>
 
-// set margin and dimensions
+
+// set margin and dimensions of graph
 var margin = {top: 50, right: 60, bottom: 160, left: 150},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -112,4 +112,3 @@ d3.csv("ind_year_data.csv", function(data) {
 
 })
 
-</script>
