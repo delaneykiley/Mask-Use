@@ -5,17 +5,20 @@ var margin = {top: 50, right: 60, bottom: 160, left: 150},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-// append svg object to "#chart3"
-var svg = d3.select("#chart3")
+// create svg object and append to "#chart3"
+var svg = d3.select("chart3")
   .append("svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+yearDict = {
 
 // Read data
 d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/11_SevCatOneNumNestedOneObsPerGroup.csv", function(data) {
 
-  // Filter a bit the data -> more than 1 million inhabitants
-  data = data.filter(function(d){ return d.value>10000000 })
 
   // Color palette for continents?
   var color = d3.scaleOrdinal()
