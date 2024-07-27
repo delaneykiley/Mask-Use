@@ -20,7 +20,7 @@ var year_band_labels = ["1920-1924", "1925-1929", "1930-1934", "1935-1939", "194
                        "1960-1964", "1965-1969", "1970-1974", "1975-1979", "1980-1984", "1985-1989", "1990-1994", "1995-1999",
                        "2000-2004", "2005-2009", "2010-2014", "2015-2019", "Other"]
 
-var movieData = d3.csv("movies.csv");
+// hard coded values from dataset, created with script contained in YearsDict.py
 var yearsDict = {"2015-2020": 256, "2005-2009": 161, "1995-1999": 101, "2010-2014": 227, 
                  "2000-2004": 147, "1990-1994": 60, "1980-1984": 8, "1975-1979": 8, 
                  "1985-1989": 25, "1970-1974": 2, "1935-1939": 2, "1940-1944": 1, "1960-1964": 1, "1965-1969": 1}
@@ -31,7 +31,7 @@ var color = d3.scaleOrdinal()
   .domain(year_band_labels)
   .range(d3.schemeDark2);
 
-// create tooltip and append to 'chart2'
+// create tooltip and append to '#chart2'
 var tooltip = d3.select("#chart2")
   .append("div")
   .style("opacity", 0)
