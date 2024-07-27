@@ -14,10 +14,10 @@ var svg = d3.select("#chart3")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-var years = ["2020", "2019", "2018"]
 
 //Read the data
-d3.csv("ind_year_data.csv", function(data) {
+const yearData = d3.csv("ind_year_data.csv");
+yearData.then( function(data) {
 
   // Add X axis
   var x = d3.scaleLinear()
