@@ -20,12 +20,25 @@ const yearData = d3.csv("ind_year_data.csv");
 yearData.then( function(data) {
 
   // Add X axis
-  var x = d3.scaleLinear()
-    .domain(data.map(function(d) { return d.Year}))
-    .range([ 0, width ]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
+  // var x = d3.scaleLinear()
+  //   .domain(data.map(function(d) { return d.Year}))
+  //   .range([ 0, width ]);
+    var x = d3.time.scale()
+        .domain(data.map(function(d) { return d.Year}))
+        .range([0, width]);
+
+     var xAxis = d3.svg.axis()
+              .scale(x)
+              .orient("bottom")
+              .tickFormat(d3.time.format("%Y"));
+    svg.append("g")
+                      .attr("class", "x axis")
+                      .attr("transform", "translate(0," + height + ")")
+                      .call(xAxis);
+    
+  // svg.append("g")
+    // .attr("transform", "translate(0," + height + ")")
+    // .call(d3.axisBottom(x));
 
     var counts = d3.map(data, function(d){ return d.Count; }).keys();
   // Add Y axis
