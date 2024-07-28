@@ -53,4 +53,14 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
 })
 
+const movie_data = d3.csv("ind_year_data.csv");
+movie_data.then(function(data) {
+  data.forEach(function(d) {
+    d.Count = +d.Count;
+    var parser = d3.timeParse("%Y");
+    d.Year = parser(d.Year);
+  });
+  console.log(data[0]);
+});
+
 // structure of this graph inspired by information at https://d3-graph-gallery.com/graph/line_basic.html
