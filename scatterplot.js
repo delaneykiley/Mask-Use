@@ -82,8 +82,8 @@ movie_data.then(function(data) {
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.value) })
+        .x(function(d) { return x(d.Year) })
+        .y(function(d) { return y(d.Count) })
         )
     
 
