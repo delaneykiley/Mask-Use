@@ -1,4 +1,3 @@
-
 // set margins and dimensions of graph
 var width = 1200
     height = 500
@@ -26,7 +25,7 @@ var yearsDict = {"2015-2020": 256, "2005-2009": 161, "1995-1999": 101, "2010-201
                  "1985-1989": 25, "1970-1974": 2, "1935-1939": 2, "1940-1944": 1, "1960-1964": 1, "1965-1969": 1}
 
 
-// set the color scale to a d3 scheme
+// set the color scale to a custom list
 var color = d3.scaleOrdinal()
   .domain(year_band_labels)
   .range(["aquamarine", "black", "blanchedalmond", "blue", "blueviolet", "brown", "burlywood", "cadetblue", 
@@ -82,7 +81,7 @@ function update(data) {
     u
 
     
-    var size = 14
+    var size = 20
   svg.selectAll("dots")
     .data(year_band_labels)
     .enter()
