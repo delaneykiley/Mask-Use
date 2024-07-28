@@ -75,11 +75,13 @@ function update(data) {
     .style("opacity", 1)
     
 
-    u
-    .on('mouseover', function(d) { this.style.opacity = 1; tooltipFunction(d, "over")})
-    u
-    .on('mousemove', function(d) { tooltipFunction(d, "move")})
+    svg.selectAll("path")
+    .on("mouseover", function(d) { this.style.opacity = 1; tooltipFunction(d, "over");})
+    .on("mousemove", function(d) { tooltipFunction(d, "move");})
+    .on("mouseout", function(d) { this.style.opacity = 0.5; tooltipFunction(d, "out");})
+
     
+ 
     
     var size = 20
   svg.selectAll("dots")
@@ -115,23 +117,20 @@ function update(data) {
 
 function tooltipFunction(d, action) {
 
-  switch (action) {
-    case "over":
+      switch (action) {
+        case "over":
+          tooltip.style("opacity", 1);
+          return;
+        case "move":
 
-      tooltip.style("opacity", 1);
-      return;
-          
-    case "move":
-
-        tooltip.html('<i>' + d.data.key + '</i>')
+          tooltip.html('<i>' + d.data.key + '</i>')
             .style('top', (d3.event.pageY + 10) + 'px')
             .style('left', (d3.event.pageX + 10) + 'px');
           return;
-
-    default:
-      tooltip.style("opacity", 0);
+        default:
+          tooltip.style("opacity", 0);
+      }
   }
-}
 
 // Initialize the plot with the dataset
 update(yearsDict)
