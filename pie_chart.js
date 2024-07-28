@@ -88,7 +88,7 @@ function update(data) {
     .enter()
     .append("rect")
       .attr("x", width * 0.25)
-      .attr("y", function(d,i){ return height * 0.00000001 + i*(size+5) - (size * 0.5)})
+      .attr("y", function(d,i){ return height * 0.00000001 + i*(size+5) - (size * 0.5) - 200})
       .attr("width", size)
       .attr("height", size)
       .style("fill", function(d){ return color(d)})
