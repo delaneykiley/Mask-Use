@@ -73,6 +73,7 @@ function update(data) {
     .attr("stroke", "white")
     .style("stroke-width", "2px")
     .style("opacity", 1)
+    
 
     u
     .on('mouseover', function(d) { this.style.opacity = 1; tooltipFunction(d, "over")})
@@ -120,15 +121,14 @@ function tooltipFunction(d, action) {
 
       tooltip.style("opacity", 1);
       return;
+          
     case "move":
 
-        tooltip.html('<u>' + d.data.key + '</u>');
+        tooltip.html('<i>' + d.data.key + '</i>')
+            .style('top', (d3.event.pageY + 10) + 'px')
+            .style('left', (d3.event.pageX + 10) + 'px');
+          return;
 
-
-
-      tooltip.style('top', (d3.event.pageY + 10) + 'px')
-              .style('left', (d3.event.pageX + 10) + 'px');
-      return;
     default:
       tooltip.style("opacity", 0);
   }
