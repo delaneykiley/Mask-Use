@@ -52,3 +52,5 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
         )
 
 })
+
+// structure of this graph inspired by information at https://d3-graph-gallery.com/graph/line_basic.html
