@@ -99,7 +99,7 @@ function update(data) {
     .enter()
     .append("text")
       .attr("x", width * 0.25 + size * 1.2)
-      .attr("y", function(d,i){ return height * 0.00000001 + i*(size+5) - 2})
+      .attr("y", function(d,i){ return height * 0.00000001 + i*(size+5) - 20})
           //+ (size * 0.5)})
       .style("fill", "black")
       .text(function(d){ return d})
