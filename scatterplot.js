@@ -15,7 +15,7 @@ var svg = d3.select("#chart3")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
+d3.csv("ind_year_data.csv", function(data) {
 
   // Add X axis
   var x = d3.scaleLinear()
@@ -38,8 +38,8 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.GrLivArea); } )
-      .attr("cy", function (d) { return y(d.SalePrice); } )
+      .attr("cx", function (d) { return x(d.Year); } )
+      .attr("cy", function (d) { return y(d.Count); } )
       .attr("r", 1.5)
       .style("fill", "#69b3a2")
 
