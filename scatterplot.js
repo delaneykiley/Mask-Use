@@ -1,10 +1,12 @@
+
+
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#chart3")
+var svg = d3.select("#my_dataviz")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -12,13 +14,17 @@ var svg = d3.select("#chart3")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-const years_data = d3.csv("/data/cities.csv");
-years_data.then(
-    function(d){
-    return { date : d3.timeParse("%Y")(d.Year), value : d.Count }
+//Read the data
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
+
+  // When reading the csv, I must format variables:
+  function(d){
+    return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
   },
-    function(data) {
-    console.log
+
+  // Now I can use this dataset:
+  function(data) {
+
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.date; }))
@@ -44,4 +50,5 @@ years_data.then(
         .x(function(d) { return x(d.date) })
         .y(function(d) { return y(d.value) })
         )
-});
+
+})
