@@ -18,16 +18,17 @@ var svg = d3.select("#chart3")
 d3.csv("ind_year_data.csv", function(data) {
 
   // Add X axis
-  var x = d3.scaleLinear()
-    .domain([0, 4000])
-    .range([ 0, width ]);
+  var x = d3.scaleTime()
+    .domain([new Date(1920, 0, 1), new Date(2021, 0, 1)])
+    .rangeRound([20,width - 20]);
+    var xAxis = d3.axisBottom(x).tickFormat(d3.timeFormat("%Y"));
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
+    .call(xAxis);
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 500000])
+    .domain([0, 60])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
