@@ -79,8 +79,7 @@ function update(data) {
     .on('mouseover', function(d) { this.style.opacity = 1; tooltipFunction(d, "over")})
     u
     .on('mousemove', function(d) { tooltipFunction(d, "move")})
-    u
-
+    
     
     var size = 20
   svg.selectAll("dots")
