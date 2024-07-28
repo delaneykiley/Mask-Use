@@ -24,8 +24,9 @@ yearData.then( function(data) {
   //   .domain(data.map(function(d) { return d.Year}))
   //   .range([ 0, width ]);
     var x = d3.time.scale()
-        .domain(data.map(function(d) { return d.Year}))
         .range([0, width]);
+
+    x.domain(data.map(function(d) { return d.Year}))
 
      var xAxis = d3.svg.axis()
               .scale(x)
