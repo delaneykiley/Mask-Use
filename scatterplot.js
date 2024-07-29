@@ -47,7 +47,7 @@ movie_data.then(function(data) {
     //     .y(function(d) { return y(d.Count) })
     //     )
 
-      // Add dots
+    // Add points to the scatter plot
   svg.append('g')
     .selectAll("dot")
     .data(data)
