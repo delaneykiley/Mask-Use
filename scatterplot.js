@@ -55,8 +55,8 @@ movie_data.then(function(data) {
   //   .append("circle")
   //     .attr("cx", function (d) { return x(d.Year); } )
   //     .attr("cy", function (d) { return y(d.Count); } )
-  //     .attr("r", 1.5)
-  //     .style("fill", "#69b3a2")
+  //     .attr("r", 5)
+  //     .style("fill", "steelblue")
     
 
     
