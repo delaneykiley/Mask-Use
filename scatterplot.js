@@ -76,15 +76,26 @@ movie_data.then(function(data) {
       .call(d3.axisLeft(y));
 
         // Add the line
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.Year) })
-        .y(function(d) { return y(d.Count) })
-        )
+    // svg.append("path")
+    //   .datum(data)
+    //   .attr("fill", "none")
+    //   .attr("stroke", "steelblue")
+    //   .attr("stroke-width", 1.5)
+    //   .attr("d", d3.line()
+    //     .x(function(d) { return x(d.Year) })
+    //     .y(function(d) { return y(d.Count) })
+    //     )
+
+      // Add dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.Year); } )
+      .attr("cy", function (d) { return y(d.Count); } )
+      .attr("r", 1.5)
+      .style("fill", "#69b3a2")
     
 
     
