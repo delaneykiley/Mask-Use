@@ -37,26 +37,26 @@ movie_data.then(function(data) {
       .call(d3.axisLeft(y));
 
         // Add the line
-    // svg.append("path")
-    //   .data(data)
-    //   .attr("fill", "none")
-    //   .attr("stroke", "steelblue")
-    //   .attr("stroke-width", 1.5)
-    //   .attr("d", d3.line()
-    //     .x(function(d) { return x(d.Year) })
-    //     .y(function(d) { return y(d.Count) })
-    //     )
+    svg.append("path")
+      .data(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.Year) })
+        .y(function(d) { return y(d.Count) })
+        )
 
     // Add points to the scatter plot
-  svg.append('g')
-    .selectAll("dot")
-    .data(data)
-    .enter()
-    .append("circle")
-      .attr("cx", function (d) { return x(d.Year); } )
-      .attr("cy", function (d) { return y(d.Count); } )
-      .attr("r", 3)
-      .style("fill", "darkblue")
+  // svg.append('g')
+  //   .selectAll("dot")
+  //   .data(data)
+  //   .enter()
+  //   .append("circle")
+  //     .attr("cx", function (d) { return x(d.Year); } )
+  //     .attr("cy", function (d) { return y(d.Count); } )
+  //     .attr("r", 3)
+  //     .style("fill", "darkblue")
     
 
     
