@@ -36,31 +36,22 @@ movie_data.then(function(data) {
     svg.append("g")
       .call(d3.axisLeft(y));
 
-        // Add the line
-    svg.append("path")
-      .data(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.Year) })
-        .y(function(d) { return y(d.Count) })
-        )
+
 
     // Add points to the scatter plot
-  // svg.append('g')
-  //   .selectAll("dot")
-  //   .data(data)
-  //   .enter()
-  //   .append("circle")
-  //     .attr("cx", function (d) { return x(d.Year); } )
-  //     .attr("cy", function (d) { return y(d.Count); } )
-  //     .attr("r", 3)
-  //     .style("fill", "darkblue")
+  svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.Year); } )
+      .attr("cy", function (d) { return y(d.Count); } )
+      .attr("r", 3)
+      .style("fill", "darkblue")
     
 
     
     
 });
 
-// structure of this graph inspired by information at https://d3-graph-gallery.com/graph/line_basic.html
+// structure of this graph inspired by information at https://d3-graph-gallery.com/graph/scatter_basic.html
